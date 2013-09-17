@@ -1,0 +1,32 @@
+body{
+	width: 440px;
+	height: auto;
+	font-family: 微软雅黑;
+	font-size: 12px;
+	background-color: #F7F5FA;
+	color: #716B7A;
+	padding: 5px;
+	margin: 0;
+	overflow: hidden;
+	text-shadow: 0 1px 0 #fff;
+}
+body .tabc{
+	background-color: #009A44;
+	width: 98%;
+	text-align: center;
+	color: #ffffff;
+	margin: 2 auto;
+	border-radius: 4px;
+	height: 24px;
+	line-height: 24px;
+	overflow: hidden;
+}
+#ua_switch span{
+	display: inline-block;
+	background-color: #E5E3E9;
+	color: #000000;
+	cursor: pointer;
+	margin: 2px;
+	padding: 4px;
+	border-radius: 2px;
+}

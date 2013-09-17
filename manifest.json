@@ -1,0 +1,47 @@
+{
+	//软件名称:达哥前端宝盒
+	"name":"前端宝盒",
+	//版本号 0.x为beta版，到1.0时发布
+	"version":"0.1",
+	//这个必需为2（Chrome 18 以上普遍了）
+	"manifest_version":2,
+	//描述，显示在GOOGLE应用商店，可以配合default_locale本地化，暂时写死为中文
+	"description":"达哥前端宝盒，主要功能有：UA切换，COOKIE管理，JS管理，EVENT管理，AJAX管理集一体的开发插件。",
+	//插件授权
+	"permissions":[
+		"cookies",
+		"webRequest",
+		"webRequestBlocking",
+		"tabs",
+		// "https://i.chzbgr.com/*",
+		"<all_urls>"
+	],
+	//设置页面
+	"options_page":"options.html",
+	//icon,一般用PNG图片，一般提供3个128（GOOGLE插件商店），48（插件管理页面），16（工具栏）
+	"icons":{"38":"icon.png"},
+	//显示在工具条上的图标及点击事件
+	"browser_action":{
+		"default_title":"前端宝盒",
+		"default_icon":"icon.png",
+		"default_popup": "popup.html"
+	},
+	//后台运行文件
+	"background":{"scripts":["source/background.js"]},
+	//安装时运行，初始化数据库
+	//"background": {"persistent": false,"scripts":["source/installanupdate.js"]},
+
+
+
+
+
+
+
+
+
+
+
+
+
+	"homepage_url": "http://www.xdnote.com/"
+}

@@ -10,8 +10,8 @@
 	//插件授权
 	"permissions":[
 		"cookies",
-//		"webRequest",
-//		"webRequestBlocking",
+		"webRequest",
+		"webRequestBlocking",
 		"tabs",
 		// "https://i.chzbgr.com/*",
 		"<all_urls>"
@@ -27,9 +27,9 @@
 		"default_popup": "popup.html"
 	},
 	//后台运行文件
-//	"background":{"scripts":["source/background.js"]},
+	"background":{"scripts":["source/Config.js","source/background.js"]},
 	//安装时运行，初始化数据库
-	"background": {"persistent": false,"scripts":["source/installanupdate.js"]},
+//	"background": {"persistent": false,"scripts":["source/installanupdate.js"]},
 
 
 

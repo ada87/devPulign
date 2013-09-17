@@ -2,10 +2,12 @@
 var onBeforeSendHeaders=function(details){
 	if(details.requestHeaders){
 		var headers = details.requestHeaders;
-		for(var i=0,j=headers.length;i<j;i++){
-			var header = headers[i];
-			if(header.name=="User-Agent"){
-				details.requestHeaders[i].value="";
+		if(Config.get(Config.UA.UASTR)){
+			for(var i=0,j=headers.length;i<j;i++){
+				var header = headers[i];
+				if(header.name=="User-Agent"){
+					details.requestHeaders[i].value=Config.get(Config.UA.UASTR);
+				}
 			}
 		}
 	}

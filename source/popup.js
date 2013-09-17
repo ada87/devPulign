@@ -35,38 +35,58 @@ Popup.prototype = {
 	store:[],
 
 	_init:function(){
-
-	var fn=this.getLocalSet;
-    chrome.windows.getCurrent(function(currentWindow) {
-      chrome.tabs.getSelected(currentWindow.id, fn);
-  	});
-	this.db = new DataBase();
-	this.db.queryUserAgents(this.queryUserAgents);
+		var fn=this.getLocalSet;
+	    chrome.windows.getCurrent(function(currentWindow) {
+	      chrome.tabs.getSelected(currentWindow.id, fn);
+	  	});
+		this.db = new DataBase();
+		this.db.queryUserAgents(this.queryUserAgents);
 
 	},
 	getLocalSet:function(tab){
 		var url= new Url(tab.url);
 		if(url.isUrl){
-			$('#current_url').text(url.protocol+url.domain+url.port);
+			$('#current_url').html(url.protocol+url.domain+url.port);
 		}else{
-			$('#current_url').text('偶卖噶，不是有效的链接哦');
+			$('#current_url').html('偶卖噶，不是有效的链接哦');
 		}
+		$('#current_ua').html('当前UA:' + (Config.get(Config.UA.NAME)==''?'系统Chrome UA':Config.get(Config.UA.NAME)));
 	},
 	queryUserAgents : function(tx,result){
 		var html='';
         var size=result.rows.length;
-        this.store=[];
+        popup.store=[];
         for(var i=0;i<size;i++){
             var data=result.rows.item(i);
-            html+='<span onclick="javascript:popup.switchUserAgent('+data.uid+')">'+data.name+'</span>';
-            this.store.push({uid:data.uid,name:data.name,uastring:data.uastring});
+            html+='<span id="'+data.uid+'">'+data.name+'</span>';
+            popup.store.push({uid:data.uid,name:data.name,uastring:data.uastring});
         }
-        $('#ua_switch').html(html);
+        $('#ua_switch').append(html);
+		var switchUserAgent = function(evt){
+			var target=evt.currentTarget;
+			popup.changeUA(target.id);
+		}
+	    $('#ua_switch span').click(switchUserAgent);
 	},
-
-	switchUserAgent : function(uid){
-		alert(uid);
+	changeUA : function(id){
+		var ua=null;
+		for(var i=0,j=this.store.length;i<j;i++){
+			if(id==this.store[i].uid){
+				ua=this.store[i];
+			}
+		}
+		if(ua){
+			Config.set(Config.UA.ID,ua.uid);
+			Config.set(Config.UA.NAME,ua.name);
+			Config.set(Config.UA.UASTR,ua.uastring);
+			$('#current_ua').html('当前UA:'+Config.get(Config.UA.NAME));
+			chrome.tabs.reload();
+//		    chrome.windows.getCurrent(function(currentWindow) {
+//		      chrome.tabs.getSelected(currentWindow.id, fn);
+//		  	});
+		}
 	}
+
 
 }
 var popup=null;

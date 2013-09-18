@@ -10,17 +10,12 @@ Options.prototype={
 
 	_init:function(){
 		this.db = new DataBase();
-		this.db.queryDomains(this.queryDomains);
 		this._eventListener();
+		this.db.queryDomains(this.queryDomains);
 	},
 	_eventListener : function(){
-		$('.uam').click(function(){
-		});
-	},
-	switchPanel : function(panel){
 		
 	},
-
 	queryDomains:function(tx,result){
         var size=result.rows.length;
         for(var i=0;i<size;i++){
@@ -35,8 +30,12 @@ Options.prototype={
 
 }
 
-
-
+var option = null;
+$(document).ready(
+	function(){
+		option = new Options();
+	}
+);
 
 
 

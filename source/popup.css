@@ -11,7 +11,7 @@ body{
 	text-shadow: 0 1px 0 #fff;
 }
 body .tabc{
-	background-color: #009A44;
+	background-color: #55744E;
 	width: 98%;
 	text-align: center;
 	color: #ffffff;
@@ -20,6 +20,7 @@ body .tabc{
 	height: 24px;
 	line-height: 24px;
 	overflow: hidden;
+	text-shadow: 0 1px 0 #000000;
 }
 #ua_switch span{
 	display: inline-block;

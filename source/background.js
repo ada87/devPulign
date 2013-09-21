@@ -15,7 +15,8 @@ var onBeforeSendHeaders=function(details){
 }
 
 chrome.webRequest.onBeforeSendHeaders.addListener(
-	onBeforeSendHeaders,
-	{urls: ["<all_urls>"]}, 
-	["blocking", "requestHeaders"]);
+								onBeforeSendHeaders,
+								{urls: ["<all_urls>"]}, 
+								["blocking", "requestHeaders"]
+							);
 

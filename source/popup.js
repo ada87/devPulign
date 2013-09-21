@@ -41,7 +41,12 @@ Popup.prototype = {
 	  	});
 		this.db = new DataBase();
 		this.db.queryUserAgents(this.queryUserAgents);
-
+		$('#to_option').click(
+			function(e){
+				chrome.tabs.create({url:chrome.extension.getURL('options.html'),selected:!0});
+			}
+		);
+		$('#ua_clear').click(this.changeUA);
 	},
 	getLocalSet:function(tab){
 		var url= new Url(tab.url);
@@ -70,9 +75,9 @@ Popup.prototype = {
 	},
 	changeUA : function(id){
 		var ua=null;
-		for(var i=0,j=this.store.length;i<j;i++){
-			if(id==this.store[i].uid){
-				ua=this.store[i];
+		for(var i=0,j=popup.store.length;i<j;i++){
+			if(id==popup.store[i].uid){
+				ua=popup.store[i];
 			}
 		}
 		if(ua){
@@ -81,12 +86,14 @@ Popup.prototype = {
 			Config.set(Config.UA.UASTR,ua.uastring);
 			$('#current_ua').html('当前UA:'+Config.get(Config.UA.NAME));
 			chrome.tabs.reload();
-//		    chrome.windows.getCurrent(function(currentWindow) {
-//		      chrome.tabs.getSelected(currentWindow.id, fn);
-//		  	});
+		}else{
+			Config.remove(Config.UA.ID);
+			Config.remove(Config.UA.NAME);
+			Config.remove(Config.UA.UASTR);
+			$('#current_ua').html('当前UA:系统Chrome UA');
+			chrome.tabs.reload();
 		}
 	}
-
 
 }
 var popup=null;

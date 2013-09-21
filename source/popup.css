@@ -10,22 +10,45 @@ body{
 	overflow: hidden;
 	text-shadow: 0 1px 0 #fff;
 }
-body .tabc{
+.tabline{
+	width: 100%;
+	height: 24px;
+	margin: 2 auto;
+	overflow: hidden;
+}
+
+.tabline .tabc{
 	background-color: #55744E;
-	width: 98%;
+	width: 84%;
 	text-align: center;
 	color: #ffffff;
-	margin: 2 auto;
 	border-radius: 4px;
 	height: 24px;
 	line-height: 24px;
 	overflow: hidden;
 	text-shadow: 0 1px 0 #000000;
+	float: left;;
+}
+.tabline .tabr{
+	width: 15%;
+	border-radius: 4px;
+	cursor: pointer;
+	color: #ffffff;
+	text-shadow: 0 1px 0 #000000;
+	display: block;
+	text-align: center;
+	float: right;
+	height: 24px;
+	line-height: 24px;
+	background-color: #575763;
+
 }
 #ua_switch span{
 	display: inline-block;
 	background-color: #E5E3E9;
 	color: #000000;
+	display: block;
+	float: left;
 	cursor: pointer;
 	margin: 2px;
 	padding: 4px;

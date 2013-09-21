@@ -1,0 +1,116 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.clear{
+	clear: both;
+}
+body{
+	width: 100%;
+	height: auto;
+	font-family: 微软雅黑;
+	font-size: 12px;
+	background-color: #F7F5FA;
+	color: #716B7A;
+	text-shadow: 0 1px 0 #fff;
+	padding-left: 30px;
+	padding-top: 20px;
+}
+nav{
+	margin: 10px;
+	width: 600px;
+	height: 30px;
+	line-height: 30px;
+	border:1px solid #ccc;
+}
+nav div{
+	width: 150px;
+	text-align: center;
+	height: 30px;
+	float: left;
+	display: block;
+	font-size: 20px;
+	border-right: 1px solid #cccccc;
+}
+nav ul{
+	float: left;
+	width: 400px;
+	height: 30px;
+	line-height: 30px;
+	list-style: none;
+}
+nav ul li{
+	display: inline-block;
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 30px;
+	line-height: 30px;
+	color: #3A64A2;
+	cursor: pointer;
+	border-right: 1px solid #cccccc;
+}
+nav ul li.selected{
+	color: #A40000;
+	border-bottom: 1px solid #F7F5FA;
+	cursor: auto;
+}
+
+
+
+.addua{
+	width: 1000px;
+	height: 30px;
+	line-height: 30px;
+	border-top: 1px solid #cccccc;
+	border-bottom:  1px solid #cccccc;
+	padding: 5px;
+}
+.addua #uname{
+	width:140px;
+	margin-right: 10px;
+}
+.addua #ustr{
+	width:580px;
+	margin-right: 10px;
+}
+.addua #ulevel{
+	width:25px;
+	margin-right: 10px;
+}
+.addua span{
+	cursor: pointer;
+	color: #136EC2;
+}
+#uatable{
+
+}
+#uatable .uaitem{
+	width: 1000px;
+	height: 24px;
+	overflow: hidden;
+	line-height: 24px;
+}
+#uatable .uaitem div{
+	float: left;
+	height: 20px;
+	text-align: left;
+	overflow: hidden;
+}
+#uatable .uaitem div.uname{
+	width: 200px;
+}
+#uatable .uaitem div.ustr{
+	width: 720px;
+}
+#uatable .uaitem div.ulevel{
+	width: 30px;
+}
+#uatable .uaitem div.udel{
+	width: 40px;
+	text-align: center;
+	cursor: pointer;
+}
+#domain #domainname{
+	width: 200px;
+	margin-left: 160px;
+}

@@ -2,21 +2,45 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="Content-Language" content="zh_cn" />
+    <link rel="stylesheet" type="text/css" href="source/option.css">
 		<title>设置</title>
 	</head>
 	<body>
-    <nav>
-      <ul class="">
-        <li>User-Agent 管理</li>
+    <nav class="navbar">
+      <div class="title">前端宝盒</div>
+      <ul id="c">
+        <li class="selected">User-Agent 管理</li>
         <li>Domain 管理</li>
       </ul>
     </nav>
-    <div>
-      <div class="setting">a</div>
-      <div class="ualist" style="display:none;"></div>
-    </div>
 
+    <div class="clear"></div>
+
+    <div id="v">
+      <div>
+        <div class="addua">
+          名称：<input type="text" id="uname">
+          UA字符串：<input type="text" id="ustr">
+          排序等级：<input type="text" id="ulevel">
+          <span id="addua">新增</span>
+        </div>
+        <div id="uatable"></div>
+      </div>
+
+      <div id="domain" style="display:none;">
+        <div class="addua adddomain">
+          当前域名：<select id="selectdomain"></select>
+          <span id="deldomain">删除域名所有配置</span>
+
+          <input type="text" id="domainname">
+          <span id="adddomain">新增</span>
+        </div>
+      </div>
+
+    </div>
+    </div>
   </body>
+
   <script src="source/jquery-2.0.0.min.js"></script>
   <script src="source/DataBase.js"></script>
   <script src="source/options.js"></script>

@@ -111,6 +111,9 @@ nav ul li.selected{
 	cursor: pointer;
 }
 #domain #domainname{
+	width: 300px;
+	margin-left: 200px;
+}
+#domain #selectdomain{
 	width: 200px;
-	margin-left: 160px;
 }

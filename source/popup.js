@@ -33,6 +33,7 @@ var Popup = function(){
 Popup.prototype = {
 	db:null,
 	store:[],
+	url:null,
 
 	_init:function(){
 		var fn=this.getLocalSet;
@@ -49,13 +50,14 @@ Popup.prototype = {
 		$('#ua_clear').click(this.changeUA);
 	},
 	getLocalSet:function(tab){
-		var url= new Url(tab.url);
-		if(url.isUrl){
-			$('#current_url').html(url.protocol+url.domain+url.port);
+		popup.url= new Url(tab.url);
+		if(popup.url.isUrl){
+			$('#current_url').html(popup.url.protocol+popup.url.domain+popup.url.port);
 		}else{
 			$('#current_url').html('偶卖噶，不是有效的链接哦');
 		}
 		$('#current_ua').html('当前UA:' + (Config.get(Config.UA.NAME)==''?'系统Chrome UA':Config.get(Config.UA.NAME)));
+		popup.initCookie();
 	},
 	queryUserAgents : function(tx,result){
 		var html='';
@@ -93,6 +95,53 @@ Popup.prototype = {
 			$('#current_ua').html('当前UA:系统Chrome UA');
 			chrome.tabs.reload();
 		}
+	},
+	initCookie:function(){
+		var fn=function(tx,result){
+	        var size=result.rows.length;
+	        if(size==0){
+	        	$('#cookiemanger').html('<div class="cookie" style="text-align:center;">此域名没有设置，请去 <a href="options.html" target="_blank">控制面板</a> 添加</div>');
+	        	return;
+	        }
+	        for(var i=0;i<size;i++){
+	            var data=result.rows.item(i);
+	            var html = '<div class="cookie">'
+	            html += '<span class="label">'+ data.name + ':</span>'
+	            html += '<select  name="'+data.name+'" id="c_'+data.cid+'"  type="'+data.type+'" reflush="'+data.reflush+'"></select>';
+	            html += '</div>';
+	            $('#cookiemanger').append(html);
+	           	popup.db.queryCookieValue(data.cid,popup.putCookieValue);
+	            $('#c_'+data.cid).change(popup.changeCookie);
+	        }
+		}
+		this.db.queryCookieByDomainName(this.url.domain,fn);
+	},
+	putCookieValue:function(tx,result){
+        var size=result.rows.length;
+        var sel=null;
+        for(var i=0;i<size;i++){
+	        var data=result.rows.item(i);
+        	sel=document.getElementById('c_'+data.cid);
+        	sel.options.add(new Option(data.sname,data.value));
+        }
+        $(sel).change(popup.changeCookie);
+
+	},
+	changeCookie:function(evt){
+		var target=evt.currentTarget;
+		var cname=$(target).attr('name');
+		var creflush=$(target).attr('reflush');
+		var fn=function(){
+			if(creflush==1){
+				chrome.tabs.reload();
+			}
+		};
+		chrome.cookies.set({
+			'domain':popup.url.domain,
+			'path':'/',
+			'name':cname,
+			'value':target.value
+			},fn);
 	}
 
 }

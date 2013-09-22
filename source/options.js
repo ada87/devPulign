@@ -44,6 +44,7 @@ Options.prototype={
 		this.db.queryUserAgents(this.queryUserAgents);
 
 		$('#adddomain').click(this.adddomain);
+		$('#deldomain').click(this.deldomain);
 		this.refulshDomainPanel();
 	},
 	adddomain:function(){
@@ -52,15 +53,18 @@ Options.prototype={
 			alert('请输入域名');
 			return;
 		}
-		option.db.addDomain(domainname,option.adddomainresult,option.adddomainresult);
-
+		option.db.addDomain(domainname,option.exedomainresult,option.exedomainresult);
 	},
-	adddomainresult:function(tx,result){
+	deldomain:function(){
+		var domainid = $('#selectdomain').val();
+		option.db.delDomain(domainid,option.exedomainresult,option.exedomainresult);
+	},
+	exedomainresult:function(tx,result){
 		if(result.rowsAffected){
-			alert('域名添加成功');
+			alert('操作成功');
 			option.refulshDomainPanel();
 		}else{
-			alert('域名添加失败');
+			alert('操作失败');
 		}
 	},
 	queryDomains:function(tx,result){

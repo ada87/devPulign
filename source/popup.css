@@ -54,3 +54,27 @@ body{
 	padding: 4px;
 	border-radius: 2px;
 }
+.clear{
+	clear: both;
+}
+#cookiemanger{
+	margin-top: 5px;
+}
+#cookiemanger .cookie{
+	margin-bottom: 5px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	border: 1px solid #344F3E;
+	border-radius: 0 5px;
+}
+#cookiemanger .cookie span.label{
+	width: 80px;
+	padding-left: 20px;
+	text-align: right;
+	padding-right: 10px;
+	display: inline-block;
+}
+#cookiemanger .cookie select{
+	width: 250px;
+	display: inline-block;
+}

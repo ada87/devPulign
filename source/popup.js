@@ -2,6 +2,7 @@ var Url = function(url){
 	this._init(url);
 };
 Url.prototype = {
+	loc:'',
 	protocol:'',
 	domain:'',
 	port:'',
@@ -9,6 +10,7 @@ Url.prototype = {
 	query:'',
 	isUrl:false,
 	_init:function(url){
+		this.loc=url;
 		var strRegex = "^(https://|http://)"			// url使用的协议	
 					+ "([^:/]+)" 						// 主机
 					+ "(:[0-9]{1,4})?" 					// 端口- :80
@@ -34,7 +36,7 @@ Popup.prototype = {
 	db:null,
 	store:[],
 	url:null,
-
+	cookies:[],
 	_init:function(){
 		var fn=this.getLocalSet;
 	    chrome.windows.getCurrent(function(currentWindow) {
@@ -51,6 +53,11 @@ Popup.prototype = {
 	},
 	getLocalSet:function(tab){
 		popup.url= new Url(tab.url);
+		var fc=function(cookies){
+			popup.cookies=cookies;
+		}
+		chrome.cookies.getAll({domain:popup.url.domain
+								}, fc)
 		if(popup.url.isUrl){
 			$('#current_url').html(popup.url.protocol+popup.url.domain+popup.url.port);
 		}else{
@@ -124,8 +131,23 @@ Popup.prototype = {
         	sel=document.getElementById('c_'+data.cid);
         	sel.options.add(new Option(data.sname,data.value));
         }
+        var cookiename=sel.name;
+        for(var i=0,j=popup.cookies.length;i<j;i++){
+        	var c=popup.cookies[i];
+        	if(c.name==cookiename){
+        		popup.setSelected(sel,c.value);
+        		break;
+        	}
+        }
         $(sel).change(popup.changeCookie);
-
+	},
+	setSelected:function(objSelect,value){
+		for (var i = 0; i < objSelect.options.length; i++) { 
+			if (objSelect.options[i].value == value) { 
+				objSelect.options[i].selected = true; 
+				break; 
+			}
+		} 
 	},
 	changeCookie:function(evt){
 		var target=evt.currentTarget;
@@ -137,6 +159,7 @@ Popup.prototype = {
 			}
 		};
 		chrome.cookies.set({
+			'url':popup.url.loc,
 			'domain':popup.url.domain,
 			'path':'/',
 			'name':cname,

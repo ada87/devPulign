@@ -13,10 +13,10 @@ DataBase.prototype={
 		if(this._db==null){
 			this._db=window.openDatabase(this._name,this._version,this._display,this._size);
 		}
-//		this._initDataBase();
+		var self=this;
+		this._db.transaction(function(tx){tx.executeSql('SELECT * FROM UserAgent',null,null,function(){self._initDataBase()});});
 	},
 	_initDataBase:function(){
-
 		this._db.transaction(function(tx){tx.executeSql(SQL.DROP.UserAgent);});
 		this._db.transaction(function(tx){tx.executeSql(SQL.DROP.Cookie_Value);});
 		this._db.transaction(function(tx){tx.executeSql(SQL.DROP.Cookie);});
@@ -37,12 +37,12 @@ DataBase.prototype={
 		this.addUserAgent('SAMSUNG GALAXY TAB','Mozilla/5.0 (Linux; U; Android 2.2; en2; SAMSUNG GT-P1000 Tablet Build/MASTER) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1',4);
 		this.addUserAgent('iPad','Mozilla/5.0 (iPad; CPU OS 6_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10B141 Safari/8536.25',4);
 		this.addUserAgent('iPhone','Mozilla/5.0 (iPhone; CPU iPhone OS 6_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10B143 Safari/8536.25',4);
-		this.addUserAgent('Google nexus','Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1',3);
+		this.addUserAgent('Google nexus','Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1',4);
 		this.addUserAgent('Xbox','Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; Xbox)',2);
 		this.addUserAgent('Opera9','Opera/9.80 (Windows NT 5.1; U; en) Presto/2.10.289 Version/12.01',9);
-		this.addUserAgent('HTC Desire','Mozilla/5.0 (Linux; U; Android 2.2; fr-fr; Desire_A8181 Build/FRF91) App3leWebKit/53.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1',10);
+		this.addUserAgent('HTC Desire','Mozilla/5.0 (Linux; U; Android 2.2; fr-fr; Desire_A8181 Build/FRF91) App3leWebKit/53.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1',4);
 		this.addUserAgent('GoogleBot','Googlebot/2.1 ( http://www.googlebot.com/bot.html) ',1);
-		this.addUserAgent('Baiduspider','Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)',10);
+		this.addUserAgent('Baiduspider','Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)',1);
 		this.addDomain('caiyun.feixin.10086.cn');
 		//name,did,type,exprie,reflush
 		this.addCookie('.roteserver','1','2','0','1');
@@ -192,5 +192,5 @@ var SQL={
 			+'( cvid INTEGER PRIMARY KEY AUTOINCREMENT,'		//id
 			+'	cid INTEGER  REFERENCES Cookie (cid) ,'			//cookie id 外键
 			+'	sname TEXT ,'									//cookie值
-			+'	value TEXT );'								//cookie的类型 1 = SWITCH 切换型，比如登录用户切换。2 = STATUS 状态型，比如判断字段
+			+'	value TEXT );'									//cookie的类型 1 = SWITCH 切换型，比如登录用户切换。2 = STATUS 状态型，比如判断字段
 }

@@ -7,7 +7,7 @@
 	</head>
 	<body>
     <nav class="navbar">
-      <div class="title">前端宝盒</div>
+      <div class="title">神器</div>
       <ul id="c">
         <li class="selected">User-Agent 管理</li>
         <li>Domain 管理</li>
@@ -39,30 +39,17 @@
           <div id="cookietable">
             <div class="addCookie">
               Cookie名称：<input type="text" id="addCookieName"> 
-              类型：切换<input type="radio" name="addCookieType" value="0">状态<input type="radio" name="addCookieType" value="1">
+              类型：切换<input type="radio" name="addCookieType" value="0" checked>状态<input type="radio" name="addCookieType" value="1">
               有效期：<select id="addCookieExprie"><option>会话过期</option><option>一小时</option><option>一天</option><option>一周</option><option>一年</option></select>
-              是否自动刷新：<input type="checkbox" id="addCookieReflush" value="1">
-            </div>
-
-            <div class="CookieItem">
-              <div class="CookieItemHead">.mssc 切换 一天 自动刷新 删除</div>
-                <div class="CookieValue">
-                <div class="addCookieValue">
-                  名称：<input type="text"> 值：<input type="text"> 
-                </div>
-                <div class="CookieValueItem">
-                  (名称) 值 删除
-                </div>
-              </div>
-
+              是否自动刷新：<input type="checkbox" id="addCookieReflush" value="1" checked>
+              <button id="addCookieAction">新增Cookie(作用于当前域名)</button>
             </div>
           </div>
         </div>
-
       </div>
 
     </div>
-    </div>
+
   </body>
 
   <script src="source/jquery-2.0.0.min.js"></script>

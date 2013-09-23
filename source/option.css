@@ -109,6 +109,7 @@ nav ul li.selected{
 	width: 40px;
 	text-align: center;
 	cursor: pointer;
+	color: #A40000;
 }
 #domain #domainname{
 	width: 300px;
@@ -116,4 +117,117 @@ nav ul li.selected{
 }
 #domain #selectdomain{
 	width: 200px;
+}
+#domain #deldomain{
+	margin-left: 5px;
+}
+
+#cookietable{
+	width: 980px;
+	height: auto;
+	margin: 5px;
+}
+#cookietable .addCookie{
+	padding: 10px;
+	background-color: #F9F6C9;
+	border: 1px dashed #ccc;
+}
+#cookietable .addCookie input,#cookietable .addCookie select{
+	margin-left: 3px;
+	margin-right: 12px;
+}
+#cookietable .addCookie button{
+	padding: 5px;
+	background-color: #3B99BB;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	color: #ffffff;
+	box-shadow: 2px;
+}
+.CookieItem{
+	padding: 10px;
+	width: 95%;
+	clear: both;
+	height: auto;
+}
+.CookieItem .CookieItemHead{
+	height: 30px;
+	line-height: 30px;
+	clear: right;
+	display: block;
+}
+.CookieItem .CookieItemHead div{
+	float: left;
+	display: block;
+	height: 30px;
+	text-align: center;
+	border-bottom: 1px solid #cccccc;
+	font-size: 14px;
+	font-weight: bold;
+}
+.CookieItem .CookieItemHead div.CookieItemName{
+	width: 300px;
+}
+.CookieItem .CookieItemHead div.CookieItemType{
+	width: 60px;
+}
+.CookieItem .CookieItemHead div.CookieItemExprie{
+	width: 200px;
+}
+.CookieItem .CookieItemHead div.CookieItemReflush{
+	width: 70px;
+}
+.CookieItem .CookieItemHead div.CookieItemReDelete{
+	width: 80px;
+	color: #A40000;
+	cursor: pointer;
+}
+.CookieItem .CookieValue{
+	clear: both;
+	margin-top: 5px;
+}
+#cookietable .addCookieValue{
+	padding: 10px;
+	width: 685px;
+	background-color: #F9F6C9;
+	border: 1px dashed #ccc;
+}
+#cookietable .addCookieValue input{
+	margin-left: 3px;
+	margin-right: 12px;
+}
+#cookietable .addCookieValue button{
+	padding: 5px;
+	background-color: #3B99BB;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	color: #ffffff;
+	box-shadow: 2px;
+}
+.CookieValueItem{
+	height: 30px;
+	line-height: 30px;
+	clear: both;
+	width: 500px;
+	display: block;
+}
+.CookieValueItem div{
+	float: left;
+	display: block;
+	height: 30px;
+	text-align: center;
+	border-bottom: 1px solid #cccccc;
+}
+.CookieValueItem div.CookieValueItemName{
+	width: 180px;
+}
+.CookieValueItem div.CookieValueItemValue{
+	width: 200px;
+}
+.CookieValueItem div.CookieValueItemDelete{
+	width: 100px;
+	cursor: pointer;
+	color: #A40000;
 }

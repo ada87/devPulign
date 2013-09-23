@@ -46,6 +46,8 @@ Options.prototype={
 		$('#adddomain').click(this.adddomain);
 		$('#deldomain').click(this.deldomain);
 		this.refulshDomainPanel();
+		$('#selectdomain').change(this.switchDomain);
+		$('#addCookieAction').click(this.addCookie);
 	},
 	adddomain:function(){
 		var domainname = $('#domainname').val();
@@ -58,6 +60,65 @@ Options.prototype={
 	deldomain:function(){
 		var domainid = $('#selectdomain').val();
 		option.db.delDomain(domainid,option.exedomainresult,option.exedomainresult);
+	},
+	switchDomain:function(){
+		var did=$('#selectdomain').val();
+		$('.CookieItem').remove();
+		option.db.queryCookieByDomainID(did,option.switchDomainCookie);
+	},
+	addCookie:function(evt){
+		console.log('addCookie');	
+	},
+	addCookieValue:function(evt){
+		console.log('addCookieValue');	
+	},
+	delCookie:function(evt){
+		console.log('delCookie');	
+	},
+	delCookieValue:function(){
+		console.log('delCookieValue');
+	},
+	switchDomainCookie:function(tx,result){
+		var size=result.rows.length;
+        for(var i=0;i<size;i++){
+            var data=result.rows.item(i);
+            var html = '<div class="CookieItem">';
+
+            html +=  '<div class="CookieItemHead">';
+            html +=  '    <div class="CookieItemName">'+data.name+'</div>';
+            html +=  '    <div class="CookieItemType">'+(data.type==1?'切换':'状态')+'</div>';
+            html +=  '    <div class="CookieItemExprie">'+data.exprie+'</div>';
+            html +=  '    <div class="CookieItemReflush">'+data.reflush+'</div>';
+            html +=  '   <div id="c_'+data.cid+'" class="CookieItemReDelete">删除</div>';
+            html +=  '</div>';
+
+            html +=  '<div class="CookieValue" id="cv_'+data.cid+'">';
+            html +=  '   <div class="addCookieValue">';
+            html +=  '   	名称：<input type="text" id="cvname_'+data.cid+'">';
+            html +=  '   	值：<input type="text" id="cvvalue_'+data.cid+'"> ';
+            html +=  '   	<button class="addCookieValueAction" id="cvadd_'+data.cid+'">新增Cookie值(作用于当前'+data.name+')</button> ';
+            html +=  '	 </div>';
+            html +=  '</div>';
+
+            html += '</div>';
+            $('#cookietable').append(html);
+            option.db.queryCookieValue(data.cid,option.switchDomainCookieValue);
+            $('#c_'+data.cid).click(option.delCookie);
+            $('#cvadd_'+data.cid).click(option.addCookieValue);
+        }
+	},
+	switchDomainCookieValue:function(tx,result){
+		var size=result.rows.length;
+        for(var i=0;i<size;i++){
+            var data=result.rows.item(i);
+        	var html='<div class="CookieValueItem">';
+            html +=  '	<div class="CookieValueItemName">'+data.sname+'</div>';
+            html +=  '	<div class="CookieValueItemValue">'+data.value+'</div>';
+            html +=  '	<div class="CookieValueItemDelete" id="cvdel_'+data.cvid+'">删除</div>';
+            html +=  '</div>';
+            $('#cv_'+data.cid).append(html);
+            $('#cvdel_'+data.cvid).click(option.delCookieValue);
+        }
 	},
 	exedomainresult:function(tx,result){
 		if(result.rowsAffected){
@@ -75,6 +136,7 @@ Options.prototype={
             var data=result.rows.item(i);
         	selDomain.options.add(new Option(data.domain,data.did));
         }
+		option.switchDomain();
 	},
 	refulshDomainPanel:function(){
 		this.db.queryDomains(this.queryDomains);

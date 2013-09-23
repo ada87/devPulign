@@ -107,6 +107,14 @@ DataBase.prototype={
 			}
 		);
 	},
+	queryCookieByDomainID:function(did,success,fail){
+		var sql='SELECT * FROM Cookie WHERE did = ?';
+		this._db.transaction(
+			function(tx){
+				tx.executeSql(sql,[did],success,fail);
+			}
+		);
+	},
 	queryCookieByDomainName:function(domain,success,fail){
 		var sql='SELECT * FROM Cookie WHERE did = (SELECT did FROM Domain WHERE domain = ?)';
 		this._db.transaction(
@@ -148,14 +156,8 @@ DataBase.prototype={
 			}
 		);
 	},
-	delCookieValue:function(cid,success,fail){
-		var sql='DELETE FROM Cookie_Value WHERE cid=?;'
-				+'DELETE FROM Cookie WHERE cid=?';
-		this._db.transaction(
-			function(tx){
-				tx.executeSql(sql,[cid,cid],success,fail);
-			}
-		);
+	delCookieValue:function(cvid,success,fail){
+		this._db.transaction(function(tx){tx.executeSql('DELETE FROM Cookie_Value WHERE cvid=?;',[cvid],success,fail);});
 	}
 }
 

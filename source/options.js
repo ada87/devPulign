@@ -67,29 +67,52 @@ Options.prototype={
 		option.db.queryCookieByDomainID(did,option.switchDomainCookie);
 	},
 	addCookie:function(evt){
-		console.log('addCookie');	
+		var name=$('#addCookieName').val();
+		var type=$('input[name="addCookieType"]:checked').val();
+		var exprie=$('#addCookieExprie').val();
+		var reflush=document.getElementById('addCookieReflush').checked?1:0;
+		var did=$('#selectdomain').val();
+		option.db.addCookie(name,did,type,exprie,reflush,option.switchDomain);
+
 	},
 	addCookieValue:function(evt){
-		console.log('addCookieValue');	
+		var target=evt.currentTarget;
+		var ids=target.id.split('_');
+		var cid=ids[1];
+		var name=$('#cvname_'+cid).val();
+		var value=$('#cvvalue_'+cid).val();
+		option.db.addCookieValue(cid,name,value,option.switchDomain);
 	},
 	delCookie:function(evt){
-		console.log('delCookie');	
+		var target=evt.currentTarget;
+		if(confirm('确定要删除'+$(target).attr('data')+'吗？')){
+			var ids=target.id.split('_');
+			var fn=function(tx,result){
+				$('#cc_'+ids[1]).remove();
+			}
+			option.db.delCookie(ids[1],fn);
+		}
 	},
-	delCookieValue:function(){
-		console.log('delCookieValue');
+	delCookieValue:function(evt){
+		var target=evt.currentTarget;
+		var ids=target.id.split('_');
+		var fn=function(tx,result){
+			$('#cvc_'+ids[1]).remove();
+		}
+		option.db.delCookieValue(ids[1],fn);
 	},
 	switchDomainCookie:function(tx,result){
 		var size=result.rows.length;
         for(var i=0;i<size;i++){
             var data=result.rows.item(i);
-            var html = '<div class="CookieItem">';
+            var html = '<div class="CookieItem" id="cc_'+data.cid+'">';
 
             html +=  '<div class="CookieItemHead">';
             html +=  '    <div class="CookieItemName">'+data.name+'</div>';
             html +=  '    <div class="CookieItemType">'+(data.type==1?'切换':'状态')+'</div>';
             html +=  '    <div class="CookieItemExprie">'+data.exprie+'</div>';
             html +=  '    <div class="CookieItemReflush">'+data.reflush+'</div>';
-            html +=  '   <div id="c_'+data.cid+'" class="CookieItemReDelete">删除</div>';
+            html +=  '   <div data="'+data.name+'" id="c_'+data.cid+'" class="CookieItemReDelete">删除</div>';
             html +=  '</div>';
 
             html +=  '<div class="CookieValue" id="cv_'+data.cid+'">';
@@ -111,7 +134,7 @@ Options.prototype={
 		var size=result.rows.length;
         for(var i=0;i<size;i++){
             var data=result.rows.item(i);
-        	var html='<div class="CookieValueItem">';
+        	var html='<div class="CookieValueItem" id="cvc_'+data.cvid+'">';
             html +=  '	<div class="CookieValueItemName">'+data.sname+'</div>';
             html +=  '	<div class="CookieValueItemValue">'+data.value+'</div>';
             html +=  '	<div class="CookieValueItemDelete" id="cvdel_'+data.cvid+'">删除</div>';

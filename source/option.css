@@ -4,6 +4,8 @@
 }
 .clear{
 	clear: both;
+	width: 1px;
+	height: 1px;
 }
 body{
 	width: 100%;

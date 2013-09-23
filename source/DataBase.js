@@ -132,13 +132,8 @@ DataBase.prototype={
 		);
 	},
 	delCookie:function(cid,success,fail){
-		var sql='DELETE FROM Cookie_Value WHERE cid=?;'
-				+'DELETE FROM Cookie WHERE cid=?';
-		this._db.transaction(
-			function(tx){
-				tx.executeSql(sql,[cid,cid],success,fail);
-			}
-		);
+		this._db.transaction(function(tx){tx.executeSql('DELETE FROM Cookie_Value WHERE cid=?;',[cid]);});
+		this._db.transaction(function(tx){tx.executeSql('DELETE FROM Cookie WHERE cid=?;',[cid],success,fail);});
 	},
 	queryCookieValue:function(cid,success,fail){
 		var sql='SELECT * FROM Cookie_Value WHERE cid = ?';

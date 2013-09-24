@@ -44,9 +44,8 @@ DataBase.prototype={
 		this.addUserAgent('GoogleBot','Googlebot/2.1 ( http://www.googlebot.com/bot.html) ',1);
 		this.addUserAgent('Baiduspider','Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)',1);
 		this.addDomain('caiyun.feixin.10086.cn');
-		//name,did,type,exprie,reflush
-		this.addCookie('.roteserver','1','2','0','1');
-		this.addCookie('.mssc','1','1','0','1');
+		this.addCookie('.roteserver','1','2','1');
+		this.addCookie('.mssc','1','1','1');
 		this.addCookieValue('1','现网环境','1');
 		this.addCookieValue('1','灰度环境','2');
 		this.addCookieValue('1','体验环境1号','3');
@@ -55,11 +54,6 @@ DataBase.prototype={
 
 	},
 	//----------------------------割开，公用方法--------------------------------------
-	/**
-		queryDomains 			查询所有有资料的域名
-		queryUserAgents 		查询所有UserAgent
-		queryCookieByDomain		查询指定域名的Cookie设置
-	**/
 	queryDomains:function(success,fail){
 		this._db.transaction(
 			function(tx){
@@ -123,11 +117,11 @@ DataBase.prototype={
 			}
 		);
 	},
-	addCookie:function(name,did,type,exprie,reflush,success,fail){
-		var sql='INSERT INTO Cookie (name,did,type,exprie,reflush) VALUES (?,?,?,?,?)';
+	addCookie:function(name,did,type,reflush,success,fail){
+		var sql='INSERT INTO Cookie (name,did,type,reflush) VALUES (?,?,?,?)';
 		this._db.transaction(
 			function(tx){
-				tx.executeSql(sql,[name,did,type,exprie,reflush],success,fail);
+				tx.executeSql(sql,[name,did,type,reflush],success,fail);
 			}
 		);
 	},
@@ -158,7 +152,7 @@ DataBase.prototype={
 
 
 
-//一期只实现UA COOKIE
+
 var SQL={
 	DROP:{UserAgent:'DROP TABLE IF EXISTS UserAgent;'					//删除所有表
 			,Cookie_Value:'DROP TABLE IF EXISTS Cookie_Value;'
@@ -181,7 +175,6 @@ var SQL={
 			+'	name TEXT ,'									//cookie 名称
 			+'	did INTEGER REFERENCES DOMAIN (cid),'			//cookie生效的域名
 			+'	type INTEGER ,'									//cookie的类型 1 = SWITCH 切换型，比如登录用户切换。2 = STATUS 状态型，比如判断字段
-			+'	exprie INTEGER, '								//过期时间 0 = SESSION 会话过期 N = N (ms)后过期
 			+'	reflush INTEGER); '								//切换时是否强制刷新 0 = 不刷新 1 = 刷新
 
 

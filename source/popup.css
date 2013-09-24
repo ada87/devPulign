@@ -78,3 +78,7 @@ body{
 	width: 250px;
 	display: inline-block;
 }
+#cookiemanger .cookie span.cpush{
+	color: #136EC2;
+	cursor: pointer;
+}

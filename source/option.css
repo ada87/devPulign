@@ -169,16 +169,13 @@ nav ul li.selected{
 	font-weight: bold;
 }
 .CookieItem .CookieItemHead div.CookieItemName{
-	width: 300px;
+	width: 270px;
 }
 .CookieItem .CookieItemHead div.CookieItemType{
-	width: 60px;
-}
-.CookieItem .CookieItemHead div.CookieItemExprie{
-	width: 200px;
+	width: 100px;
 }
 .CookieItem .CookieItemHead div.CookieItemReflush{
-	width: 70px;
+	width: 135px;
 }
 .CookieItem .CookieItemHead div.CookieItemReDelete{
 	width: 80px;
@@ -220,6 +217,7 @@ nav ul li.selected{
 	display: block;
 	height: 30px;
 	text-align: center;
+	overflow: hidden;
 	border-bottom: 1px solid #cccccc;
 }
 .CookieValueItem div.CookieValueItemName{

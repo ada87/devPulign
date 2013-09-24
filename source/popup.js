@@ -113,15 +113,33 @@ Popup.prototype = {
 	        for(var i=0;i<size;i++){
 	            var data=result.rows.item(i);
 	            var html = '<div class="cookie">'
-	            html += '<span class="label">'+ data.name + ':</span>'
-	            html += '<select  name="'+data.name+'" id="c_'+data.cid+'"  type="'+data.type+'" reflush="'+data.reflush+'"></select>';
-	            html += '</div>';
+	            html += '		<span class="label">'+ data.name + ':</span>'
+	            html += '		<select  name="'+data.name+'" id="c_'+data.cid+'"  reflush="'+data.reflush+'"></select>';
+	            if(data.type==1){
+	            	html += '	<span cid="'+data.cid+'" name="'+data.name+'" class="cpush">记录本页</span>'
+	            }
+	            html += '	</div>';
 	            $('#cookiemanger').append(html);
 	           	popup.db.queryCookieValue(data.cid,popup.putCookieValue);
 	            $('#c_'+data.cid).change(popup.changeCookie);
 	        }
+	        $('.cpush').click(popup.pushCookieValue);
 		}
 		this.db.queryCookieByDomainName(this.url.domain,fn);
+	},
+	pushCookieValue:function(evt){
+		var target=evt.currentTarget;
+		var cid=$(target).attr('cid');
+		var cname=$(target).attr('name')
+		var fn=function(cookie){
+			var cb=function(tx,result){
+				alert('记录成功');
+			}
+			if(cookie){
+				popup.db.addCookieValue(cid,cookie.value,cookie.value,cb);
+			}
+		};
+		chrome.cookies.get({name:cname,url:popup.url.loc},fn);
 	},
 	putCookieValue:function(tx,result){
         var size=result.rows.length;
@@ -131,7 +149,7 @@ Popup.prototype = {
         	sel=document.getElementById('c_'+data.cid);
         	sel.options.add(new Option(data.sname,data.value));
         }
-        var cookiename=sel.name;
+        var cookiename=$(sel).attr('name');
         for(var i=0,j=popup.cookies.length;i<j;i++){
         	var c=popup.cookies[i];
         	if(c.name==cookiename){

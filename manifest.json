@@ -1,19 +1,18 @@
 {
-	//软件名称:达哥前端宝盒
-	"name":"网站破解神器",
-	//版本号 0.x为beta版，到1.0时发布
+	//软件名称
+	"name":"神器",
+	//版本号
 	"version":"0.1",
 	//这个必需为2（Chrome 18 以上普遍了）
 	"manifest_version":2,
 	//描述，显示在GOOGLE应用商店，可以配合default_locale本地化，暂时写死为中文
-	"description":"网站破解神器，主要功能有：UA切换，COOKIE管理，JS管理，EVENT管理，AJAX管理集一体的开发插件。",
+	"description":"主要功能有：UA切换，COOKIE定制化管理",
 	//插件授权
 	"permissions":[
 		"cookies",
 		"webRequest",
 		"webRequestBlocking",
 		"tabs",
-		// "https://i.chzbgr.com/*",
 		"<all_urls>"
 	],
 	//设置页面
@@ -27,21 +26,7 @@
 		"default_popup": "popup.html"
 	},
 	//后台运行文件
-	"background":{"scripts":["source/Config.js","source/background.js"]},
+	"background":{"scripts":["source/Config.js","source/background.js"]}
 	//安装时运行，初始化数据库
 //	"background": {"persistent": false,"scripts":["source/installanupdate.js"]},
-
-
-
-
-
-
-
-
-
-
-
-
-
-	"homepage_url": "http://www.xdnote.com/"
 }

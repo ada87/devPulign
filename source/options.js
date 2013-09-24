@@ -69,10 +69,9 @@ Options.prototype={
 	addCookie:function(evt){
 		var name=$('#addCookieName').val();
 		var type=$('input[name="addCookieType"]:checked').val();
-		var exprie=$('#addCookieExprie').val();
 		var reflush=document.getElementById('addCookieReflush').checked?1:0;
 		var did=$('#selectdomain').val();
-		option.db.addCookie(name,did,type,exprie,reflush,option.switchDomain);
+		option.db.addCookie(name,did,type,reflush,option.switchDomain);
 
 	},
 	addCookieValue:function(evt){
@@ -110,8 +109,7 @@ Options.prototype={
             html +=  '<div class="CookieItemHead">';
             html +=  '    <div class="CookieItemName">'+data.name+'</div>';
             html +=  '    <div class="CookieItemType">'+(data.type==1?'切换':'状态')+'</div>';
-            html +=  '    <div class="CookieItemExprie">'+data.exprie+'</div>';
-            html +=  '    <div class="CookieItemReflush">'+data.reflush+'</div>';
+            html +=  '    <div class="CookieItemReflush">'+(data.reflush==1?'切换刷新':'不刷新')+'</div>';
             html +=  '   <div data="'+data.name+'" id="c_'+data.cid+'" class="CookieItemReDelete">删除</div>';
             html +=  '</div>';
 

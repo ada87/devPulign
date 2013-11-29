@@ -152,7 +152,7 @@ Popup.prototype = {
         var cookiename=$(sel).attr('name');
         for(var i=0,j=popup.cookies.length;i<j;i++){
         	var c=popup.cookies[i];
-        	if(c.name==cookiename){
+        	if(c.name==cookiename&&c.path=='/'){
         		popup.setSelected(sel,c.value);
         		break;
         	}

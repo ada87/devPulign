@@ -44,12 +44,12 @@ DataBase.prototype={
 		this.addUserAgent('GoogleBot','Googlebot/2.1 ( http://www.googlebot.com/bot.html) ',1);
 		this.addUserAgent('Baiduspider','Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)',1);
 		this.addDomain('caiyun.feixin.10086.cn');
-		this.addCookie('.roteserver','1','2','1');
+		this.addCookie('.msrt','1','2','1');
 		this.addCookie('.mssc','1','1','1');
-		this.addCookieValue('1','现网环境','1');
-		this.addCookieValue('1','灰度环境','2');
-		this.addCookieValue('1','体验环境1号','3');
-		this.addCookieValue('1','体验环境2号','4');
+		this.addCookieValue('1','现网环境','0000');
+		this.addCookieValue('1','灰度环境','s-hd1');
+		this.addCookieValue('1','镜像环境之mCloud','s-jx2');
+		this.addCookieValue('1','镜像环境之caiyun','s-jx1');
 
 
 	},
